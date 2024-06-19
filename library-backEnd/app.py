@@ -3,11 +3,13 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from extensions import db
 from library import library_api
+from authentication import authentication_api
 
 app = Flask(__name__)
 CORS(app, origins="*")
 
 app.register_blueprint(library_api, url_prefix='/library')
+app.register_blueprint(authentication_api, url_prefix='/auth')
 
 app.config['SECRET_KEY'] = 'key_secret'
 app.config['BASE_TEMPLATE_FOLDER'] = 'library/templates'

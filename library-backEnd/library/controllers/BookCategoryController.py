@@ -46,7 +46,7 @@ class BookCategoryController:
             else:
                 return jsonify({'message': 'Catégorie non trouvée'}), 404
         except KeyError:
-            return jsonify({'message': 'Donées manquantes'}), 400
+            return jsonify({'message': 'Données manquantes'}), 400
         except Exception as e:
             db.session.rollback()
             return jsonify({'message':e}), 500

@@ -1,5 +1,43 @@
-<script setup>
-
+<script>
+import axios from "axios";
+export default {
+  data(){
+    return{
+      category: {
+        nom : '',
+        description: '',
+        statut: ''
+      },
+      categories: []
+    }
+  },
+  name: "Categories",
+  mounted() {
+    this.allCategorie();
+  },
+  methods:{
+    async allCategorie(){
+      await axios
+          .get('http://127.0.0.1:5000/library/listCategory')
+          .then(value => {
+            this.categories = value.data
+            console.log(value.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+    async deleteCategorie(categorie){
+      await axios
+          .delete("http://127.0.0.1:5000/library/deleteCategory/"+categorie.id)
+          .then(response=>{
+            console.log("response",response.data);
+            this.allCategorie();
+          }).catch((error)=>{
+            console.log(error)})
+    },
+  }
+}
 </script>
 
 <template>
@@ -22,27 +60,15 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Nom1</td>
-                          <td>Description1</td>
-                          <td class="text-warning">Non-disponible</td>
-                          <td>
-                            <button type="button" class="btn btn-danger btn-rounded btn-icon m-2">
-                              <i class="ti-eraser"></i>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-rounded btn-icon">
-                              <i class="ti-pencil-alt"></i>
-                            </button>
+                        <tr v-for="(item, index) in categories">
+                          <td>{{index+1}}</td>
+                          <td>{{ item.nom }}</td>
+                          <td>{{ item.description }}</td>
+                          <td :class="item.statut === 'non-disponible' ? 'text-warning' : 'text-success'">
+                            {{ item.statut }}
                           </td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Nom2</td>
-                          <td>Description2</td>
-                          <td class="text-success">Disponible</td>
                           <td>
-                            <button type="button" class="btn btn-danger btn-rounded btn-icon m-2">
+                            <button type="button" v-on:click="deleteCategorie(item)" class="btn btn-danger btn-rounded btn-icon m-2">
                               <i class="ti-eraser"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-rounded btn-icon">
