@@ -1,7 +1,7 @@
 from library import library_api
 from library.controllers.BookGenreController import BookGenreController
 
-bookGenreController = BookGenreController
+bookGenreController = BookGenreController()
 
 
 @library_api.route("/genre", methods=["POST"])

@@ -24,6 +24,7 @@ export default {
               nom : '',
               statut: ''
             }
+            this.allGenre();
           }).catch((error)=>{
             console.log(error)
           })
@@ -38,6 +39,15 @@ export default {
           .catch(error => {
             console.log(error)
           })
+    },
+    async deleteGenre(genre){
+      await axios
+          .delete("http://127.0.0.1:5000/library/deleteGenre/"+genre.id)
+          .then(response=>{
+            console.log("response",response.data);
+            this.allGenre();
+          }).catch((error)=>{
+            console.log(error)})
     },
   }
 }
@@ -109,7 +119,7 @@ export default {
                     {{ item.statut }}
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-rounded btn-icon m-2">
+                    <button type="button" v-on:click="deleteGenre(item)" class="btn btn-danger btn-rounded btn-icon m-2">
                       <i class="ti-eraser"></i>
                     </button>
                     <button type="button" class="btn btn-warning btn-rounded btn-icon">
