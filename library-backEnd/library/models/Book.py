@@ -24,5 +24,5 @@ class Book(db.Model):
             filename = secure_filename(image_file.filename)
             image_path = os.path.join(upload_folder, filename)
             image_file.save(image_path)
-            self.image = filename
+            self.imageCouverture = filename
             db.session.commit()
