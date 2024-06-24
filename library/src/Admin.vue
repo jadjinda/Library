@@ -196,7 +196,7 @@ import face28 from "@/assets/images/faces/face28.jpg";
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="ti-star menu-icon"></i>
-              <span class="menu-title">Notification</span>
+              <span class="menu-title">Historique</span>
             </a>
           </li>
           <li class="nav-item">
