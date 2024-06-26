@@ -24,8 +24,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://josue:1234Jojo@127.0.0.1:3306/l
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #Jwt Configuration
-app.config["JWT_SECRET_KEY"] = "azertyôe^zdbjbhshdkfksnnjl"
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(seconds=30)
+app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
 jwt = JWTManager(app)
 
 db.init_app(app)

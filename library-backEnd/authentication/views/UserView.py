@@ -7,16 +7,9 @@ userController = UserController()
 
 @authentication_api.route("/login", methods=["POST"])
 def login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
-    print(email, password)
-    return userController.login(email, password)
+    return userController.login()
 
 
 @authentication_api.route("/register", methods=["POST"])
 def register():
-    firstname = request.json.get('firstname', None)
-    username = request.json.get('username', None)
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
     return userController.register()
