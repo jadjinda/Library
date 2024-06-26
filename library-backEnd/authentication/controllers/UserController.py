@@ -24,7 +24,7 @@ class UserController:
         user = User.query.filter_by(email=data['email']).first()
 
         if user and check_password_hash(user.password, data['password']):
-            access_token = create_access_token(identity={'username': user.username})
+            access_token = create_access_token(identity={'email': user.email})
             return jsonify(access_token=access_token)
         else:
             return jsonify(message="Invalid credentials"), 401
